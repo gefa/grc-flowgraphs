@@ -106,13 +106,12 @@ if __name__ == '__main__':
     print(STEPS)
     print("channel "+str(channel))
     subp = Popen(['python3','uhd_msg_tune.py']) #, stdout=PIPE, stderr=PIPE)
-
+    time.sleep(6)
     for vary in STEPS:
-        time.sleep(7)
         print("CURRENT STEP "+str(vary))
         gnuradio_set_vars(channel=vary)
         print('Freq:', gnuradio_get_vars('channel'))
-
+        time.sleep(5)
     
     #time.sleep(10)
     print("Killing "+str(subp.pid))

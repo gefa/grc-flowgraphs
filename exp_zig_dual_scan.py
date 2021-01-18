@@ -109,10 +109,10 @@ if __name__ == '__main__':
     time.sleep(6)
 
     for vary in STEPS:
-        time.sleep(5)
         print("CURRENT STEP "+str(vary))
         gnuradio_set_vars(channel=vary)
         print('Freq:', gnuradio_get_vars('channel'))
+        time.sleep(5)
 
     
     #time.sleep(10)
