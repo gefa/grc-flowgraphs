@@ -99,9 +99,9 @@ if __name__ == '__main__':
 
     channel = 11
     START=11
-    STEP=1
-    STOP=18
-    STEPS = [x for x in range(START,STOP+STEP,STEP)]
+    STEP=2
+    STOP=26
+    STEPS = [x for x in range(START,STOP+STEP-1,STEP)]
 
     iterations = int(sys.argv[1]) if len(sys.argv) == 2 else 1
     print(f"Num iterations: {iterations}")
