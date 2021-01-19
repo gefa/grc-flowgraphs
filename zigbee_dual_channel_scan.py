@@ -50,7 +50,7 @@ class zigbee_dual_channel_scan(gr.top_block):
         self.channel = channel = 11
         self.transition_width = transition_width = 300e3
         self.sample_rate = sample_rate = 8e6
-        self.freq_msg = freq_msg = 1000000 * (2400 + 5 * (channel - 10))
+        self.freq_msg = freq_msg = 1000000 * (2395 + channel_spacing * (channel - 10))
         self.cutoff_freq = cutoff_freq = 850e3
         self.channel_spacing = channel_spacing = 10e6
         self.base_freq = base_freq = int(2405e6)
