@@ -47,12 +47,12 @@ class zigbee_dual_channel_scan(gr.top_block):
         ##################################################
         # Variables
         ##################################################
+        self.channel_spacing = channel_spacing = 5e6
         self.channel = channel = 11
         self.transition_width = transition_width = 300e3
         self.sample_rate = sample_rate = 8e6
-        self.freq_msg = freq_msg = 1000000 * (2400 + 5 * (channel - 10))
+        self.freq_msg = freq_msg = 1000000 * (2400 + channel_spacing * (channel - 10))
         self.cutoff_freq = cutoff_freq = 850e3
-        self.channel_spacing = channel_spacing = 10e6
         self.base_freq = base_freq = int(2405e6)
         self.squelch_threshold = squelch_threshold = -75
         self.lowpass_filter = lowpass_filter = firdes.low_pass(1, sample_rate, cutoff_freq, transition_width, firdes.WIN_HAMMING, 6.76)
@@ -171,13 +171,21 @@ class zigbee_dual_channel_scan(gr.top_block):
         self.lo_msg = lo_msg
         self.set_cmd_msg(pmt.to_pmt({'antenna': self.ant_msg, 'gain': self.gain_msg, 'chan': 0, 'freq': self.freq_msg, 'lo_offset': self.lo_msg}))
 
+    def get_channel_spacing(self):
+        return self.channel_spacing
+
+    def set_channel_spacing(self, channel_spacing):
+        self.channel_spacing = channel_spacing
+        self.set_freq((self.base_freq+(self.channel_spacing*(self.channel-11))))
+        self.set_freq_msg(1000000 * (2400 + self.channel_spacing * (self.channel - 10)))
+
     def get_channel(self):
         return self.channel
 
     def set_channel(self, channel):
         self.channel = channel
         self.set_freq((self.base_freq+(self.channel_spacing*(self.channel-11))))
-        self.set_freq_msg(1000000 * (2400 + 5 * (self.channel - 10)))
+        self.set_freq_msg(1000000 * (2400 + self.channel_spacing * (self.channel - 10)))
 
     def get_transition_width(self):
         return self.transition_width
@@ -210,13 +218,6 @@ class zigbee_dual_channel_scan(gr.top_block):
     def set_cutoff_freq(self, cutoff_freq):
         self.cutoff_freq = cutoff_freq
         self.set_lowpass_filter(firdes.low_pass(1, self.sample_rate, self.cutoff_freq, self.transition_width, firdes.WIN_HAMMING, 6.76))
-
-    def get_channel_spacing(self):
-        return self.channel_spacing
-
-    def set_channel_spacing(self, channel_spacing):
-        self.channel_spacing = channel_spacing
-        self.set_freq((self.base_freq+(self.channel_spacing*(self.channel-11))))
 
     def get_base_freq(self):
         return self.base_freq

@@ -65,21 +65,21 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 234]
+    coordinate: [1164, 208]
     rotation: 0
     state: disabled
 - name: channel_spacing
   id: variable
   parameters:
     comment: ''
-    value: 10e6
+    value: 5e6
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [515, 78]
+    coordinate: [517, 90]
     rotation: 0
-    state: true
+    state: enabled
 - name: cmd_msg
   id: variable
   parameters:
@@ -90,7 +90,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1113, 77]
+    coordinate: [1053, 51]
     rotation: 0
     state: enabled
 - name: cutoff_freq
@@ -133,12 +133,12 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 1000000 * (2400 + 5 * (channel - 10))
+    value: 1000000 * (2400 + channel_spacing * (channel - 10))
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1123, 139]
+    coordinate: [1063, 113]
     rotation: 0
     state: true
 - name: freq_offset
@@ -150,7 +150,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [468, 181]
+    coordinate: [478, 159]
     rotation: 0
     state: true
 - name: gmsk_gain_mu
@@ -313,7 +313,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1010, 166]
+    coordinate: [950, 140]
     rotation: 0
     state: true
 - name: blocks_ctrlport_monitor_0
@@ -339,7 +339,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1231, 388]
+    coordinate: [1145, 387]
     rotation: 0
     state: disabled
 - name: blocks_file_sink_0_0
@@ -587,7 +587,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [995, 51]
+    coordinate: [947, 20]
     rotation: 0
     state: true
 - name: ieee802_15_4_packet_sink_0
@@ -636,7 +636,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1117, 200]
+    coordinate: [1057, 174]
     rotation: 0
     state: true
 - name: note_0
@@ -1110,7 +1110,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1220, 143]
+    coordinate: [1160, 117]
     rotation: 0
     state: enabled
 
