@@ -99,9 +99,9 @@ if __name__ == '__main__':
 
     channel = 11
     START=11
-    STEP=1
+    STEP=2
     STOP=26
-    STEPS = [x for x in range(START,STOP+STEP,STEP)]
+    STEPS = [x for x in range(START,STOP+STEP-1,STEP)]
 
     print(STEPS)
     print("channel "+str(channel))
