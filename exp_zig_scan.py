@@ -102,16 +102,20 @@ if __name__ == '__main__':
     STEP=1
     STOP=26
     STEPS = [x for x in range(START,STOP+STEP,STEP)]
+    
+    iterations = int(sys.argv[1]) if len(sys.argv) == 2 else 1
+    print(f"Num iterations: {iterations}")
 
     print(STEPS)
     print("channel "+str(channel))
     subp = Popen(['python3','uhd_msg_tune.py']) #, stdout=PIPE, stderr=PIPE)
     time.sleep(6)
-    for vary in STEPS:
-        print("CURRENT STEP "+str(vary))
-        gnuradio_set_vars(channel=vary)
-        print('Freq:', gnuradio_get_vars('channel'))
-        time.sleep(5)
+    for _ in range(iterations):
+        for vary in STEPS:
+            print("CURRENT STEP "+str(vary))
+            gnuradio_set_vars(channel=vary)
+            print('Freq:', gnuradio_get_vars('channel'))
+            time.sleep(5)
     
     #time.sleep(10)
     print("Killing "+str(subp.pid))
