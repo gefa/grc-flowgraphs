@@ -110,9 +110,10 @@ if __name__ == '__main__':
     subp = Popen(['python3','zigbee_dual_channel_scan.py']) #, stdout=PIPE, stderr=PIPE)
     time.sleep(6)
 
-    for _ in range(iterations):
+    for i in range(iterations):
         for vary in STEPS:
-            print("CURRENT STEP "+str(vary))
+            print(f"CURRENT STEP {vary}")
+            print(f"CURRENT Iteration {i+1}/{iterations}")
             gnuradio_set_vars(channel=vary)
             print('Freq:', gnuradio_get_vars('channel'))
             time.sleep(5)
