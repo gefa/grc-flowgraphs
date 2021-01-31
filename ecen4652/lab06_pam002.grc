@@ -44,6 +44,18 @@ blocks:
     coordinate: [699, 9]
     rotation: 0
     state: true
+- name: beta
+  id: variable
+  parameters:
+    comment: ''
+    value: '0.5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1111, 121]
+    rotation: 0
+    state: enabled
 - name: gain
   id: variable_qtgui_range
   parameters:
@@ -65,6 +77,18 @@ blocks:
     coordinate: [508, 9]
     rotation: 0
     state: true
+- name: k
+  id: variable
+  parameters:
+    comment: ''
+    value: '5'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1041, 119]
+    rotation: 0
+    state: true
 - name: nfilts
   id: variable
   parameters:
@@ -76,28 +100,28 @@ blocks:
     bus_structure: null
     coordinate: [28, 292]
     rotation: 0
-    state: true
+    state: disabled
 - name: pparams
   id: variable
   parameters:
     comment: ''
-    value: 5, 0.5
+    value: '[5, 0.5]'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
     coordinate: [1032, 10]
     rotation: 0
-    state: true
+    state: disabled
 - name: ptype
   id: variable_qtgui_chooser
   parameters:
     comment: ''
     gui_hint: ''
     label: ''
-    label0: ''
-    label1: ''
-    label2: ''
+    label0: '"rect"'
+    label1: '"rcf"'
+    label2: '"rrcf"'
     label3: ''
     label4: ''
     labels: '[]'
@@ -129,7 +153,7 @@ blocks:
     rangeType: float
     start: '0'
     step: '1'
-    stop: '16'
+    stop: 2*sps
     value: '0'
     widget: counter_slider
   states:
@@ -395,7 +419,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_delay: '0'
-    taps: pf.pamhRt(sps,ptype,pparams)
+    taps: ptfun.pamhRt(sps,ptype,[k,beta])
     type: fff
   states:
     bus_sink: false
@@ -403,7 +427,7 @@ blocks:
     bus_structure: null
     coordinate: [146, 361]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: fir_filter_xxx_0_0
   id: fir_filter_xxx
   parameters:
@@ -441,7 +465,7 @@ blocks:
     bus_structure: null
     coordinate: [154, 291]
     rotation: 0
-    state: true
+    state: disabled
 - name: import_0
   id: import
   parameters:
@@ -455,7 +479,7 @@ blocks:
     bus_structure: null
     coordinate: [776, 17]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: interp_fir_filter_xxx_0
   id: interp_fir_filter_xxx
   parameters:
@@ -466,7 +490,7 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     samp_delay: '0'
-    taps: '[1,1,1,1,1,1,1,1]'
+    taps: ptfun.pampt(sps,ptype,[k,beta])
     type: fff
   states:
     bus_sink: false
@@ -509,7 +533,7 @@ blocks:
     alpha7: '1.0'
     alpha8: '1.0'
     alpha9: '1.0'
-    autoscale: 'False'
+    autoscale: 'True'
     axislabels: 'True'
     color1: blue
     color10: dark blue
@@ -524,7 +548,7 @@ blocks:
     comment: ''
     ctrlpanel: 'False'
     entags: 'True'
-    grid: 'False'
+    grid: 'True'
     gui_hint: ''
     label1: Signal 1
     label10: Signal 10
@@ -606,7 +630,7 @@ blocks:
     alpha7: '1.0'
     alpha8: '1.0'
     alpha9: '1.0'
-    autoscale: 'False'
+    autoscale: 'True'
     axislabels: 'True'
     color1: blue
     color10: dark blue
@@ -621,7 +645,7 @@ blocks:
     comment: ''
     ctrlpanel: 'False'
     entags: 'True'
-    grid: 'False'
+    grid: 'True'
     gui_hint: ''
     label1: Signal 1
     label10: Signal 10
@@ -636,7 +660,7 @@ blocks:
     legend: 'True'
     marker1: '-1'
     marker10: '-1'
-    marker2: '-1'
+    marker2: '0'
     marker3: '-1'
     marker4: '-1'
     marker5: '-1'
