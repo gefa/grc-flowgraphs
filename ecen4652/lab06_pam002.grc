@@ -447,7 +447,7 @@ blocks:
   parameters:
     alias: ''
     comment: ''
-    imports: import sys;sys.path.insert(1, '/home/gnuradio/grc-flowgraphs');import
+    imports: import sys;sys.path.insert(1, '/home/gnuradio/grc-flowgraphs/ecen4652');import
       ptfun as ptfun
   states:
     bus_sink: false
